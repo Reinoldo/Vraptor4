@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.catalina.connector.Request;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -13,6 +15,7 @@ import br.com.caelum.vraptor.dao.FormularioDao;
 import br.com.caelum.vraptor.dao.OptionsDao;
 import br.com.caelum.vraptor.dao.QuestionDao;
 import br.com.caelum.vraptor.model.Formulario;
+import br.com.caelum.vraptor.model.Question;
 
 
 @Controller
@@ -42,18 +45,19 @@ public class FormularioController {
 		
 		result.include("formularioList", dao.lista());
 		
-		result.include("options", daoO.lista());
+		
 		
 		
 	}
 	
 	
-	
+
 	@Get
-	public void visualiza(Formulario f){
+	public void visualiza(Formulario formulario){
 		
-		System.out.println("teste form" +dao.busca(f) );
-		result.include("questionList", daoQuestion.lista());
+		System.out.println("teste " + formulario.getId());
+		result.include("questionList", daoQuestion.lista(formulario));
+		result.include("optionsList",daoO.lista());
 	}
 	
 	
