@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import br.com.caelum.vraptor.model.Formulario;
 import br.com.caelum.vraptor.model.Question;
 
 public class QuestionDao {
@@ -35,8 +36,8 @@ public class QuestionDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Question> lista() {
-		return em.createQuery("select p from Question p").getResultList();
+	public List<Question> lista(Formulario formulario) {
+		return em.createQuery("select p from Question p where formulario = " + formulario.getId()).getResultList();
 	}
 
 }
